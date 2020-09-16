@@ -82,9 +82,7 @@ namespace DatingApp.API
                 });
             }
 
-            // app.UseHttpsRedirection();
-
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            // app.UseHttpsRedirection();            
 
             app.UseRouting();
 
@@ -92,9 +90,16 @@ namespace DatingApp.API
 
             app.UseAuthorization();
 
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
+            app.UseDefaultFiles();
+            
+            app.UseStaticFiles();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapFallbackToController("Index", "Fallback");
             });
         }
     }
